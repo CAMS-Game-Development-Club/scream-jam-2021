@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    private static PlayerAttack _instance;
-    public static PlayerAttack Instance {
+    private static Player _instance;
+    public static Player Instance {
         get {
             if (_instance == null) {
                 Debug.LogError("Playerattack is null");
@@ -13,7 +13,8 @@ public class PlayerAttack : MonoBehaviour
         } private set { }
     }
 
-    public float health;
+    public float health = 3f;
+    public int candy_collected = 0;
 
     [SerializeField]
     private float cooldownSeconds = 3;
@@ -49,6 +50,10 @@ public class PlayerAttack : MonoBehaviour
             health -= collidedObject.GetComponent<Weapon>().weaponDamage;
             StartCoroutine(damageAnimation());
             invincibilityTimePassed = 0;
+        } else if (collidedObject.tag == "Candy") {
+            Destroy(collidedObject.gameObject);
+            candy_collected += 1;
+            HUD.Instance.UpdateScore();
         }
         
         if (health <= 0) { //Check for player death
