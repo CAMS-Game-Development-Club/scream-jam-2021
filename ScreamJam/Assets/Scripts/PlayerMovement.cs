@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Start() {
         // Initialize rigid body 2d
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        rb2d.freezeRotation = true;
+        //rb2d.freezeRotation = true;
     }
 
     // Update is called once per frame
