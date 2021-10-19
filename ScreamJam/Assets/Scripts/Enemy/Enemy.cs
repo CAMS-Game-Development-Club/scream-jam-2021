@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private int health {get; set;}
-    [SerializeField]
-    private bool isAlive { get; set; }
+    public int health;
+    public bool isAlive;
     public void checkIfAlive() {
         if (health <= 0) {
             isAlive = false;
