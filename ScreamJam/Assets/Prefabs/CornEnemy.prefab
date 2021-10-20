@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9191112383710833103}
   - component: {fileID: 3244311541441531044}
+  - component: {fileID: 8753292864455655059}
   m_Layer: 0
   m_Name: Sword
   m_TagString: EnemyWeapon
@@ -187,6 +188,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1015998, y: 0.0769484}
   m_EdgeRadius: 0
+--- !u!114 &8753292864455655059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385190208355776644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 272a985a0de59834dacc7801386572a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamage: 1
 --- !u!1 &6010987614947646789
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,3 +245,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f9c8ebb10025648941c2313b12412a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  isAlive: 0

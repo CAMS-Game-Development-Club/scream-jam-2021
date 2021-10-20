@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         GameObject collidedObject = collision.gameObject;
         if (collidedObject.tag == "EnemyWeapon") { // Check if collided object is an enemy weapon hitbox
             // Deal damage
-            health -= collidedObject.GetComponent<Weapon>().weaponDamage;
+            health -= collidedObject.GetComponentInChildren<Weapon>().weaponDamage;
             StartCoroutine(damageAnimation());
             invincibilityTimePassed = 0;
         } else if (collidedObject.tag == "Candy") {
