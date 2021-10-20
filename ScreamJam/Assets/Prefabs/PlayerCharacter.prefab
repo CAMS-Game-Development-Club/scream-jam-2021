@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 724948698}
   - component: {fileID: 3865257376175118520}
   - component: {fileID: 8634817962623794863}
+  - component: {fileID: 6306467883745381426}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,7 +119,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -178,7 +179,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.5, y: 1}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -202,6 +203,7 @@ MonoBehaviour:
   candy_collected: 0
   cooldownSeconds: 3
   hitInvincibility: 0.5
+  anim: {fileID: 6306467883745381426}
 --- !u!95 &8634817962623794863
 Animator:
   serializedVersion: 3
@@ -221,6 +223,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6306467883745381426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565317810468748300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab2324b835cb064782095cd6a1bcdaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteR: {fileID: 7695215918008935378}
+  rb2d: {fileID: 1285632651111187171}
+  anim: {fileID: 8634817962623794863}
 --- !u!1 &6230222214909672584
 GameObject:
   m_ObjectHideFlags: 0

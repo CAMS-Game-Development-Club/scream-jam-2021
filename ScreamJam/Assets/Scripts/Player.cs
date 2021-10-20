@@ -20,8 +20,13 @@ public class Player : MonoBehaviour
     private float cooldownSeconds = 3;
     private float secondsSinceLastAttack = 3;
     [SerializeField]
-    private float hitInvincibility = 0.5f;
+    public float hitInvincibility = 0.5f;
     private float invincibilityTimePassed = 0.5f;
+
+    private bool mouseAlreadyClicked = false;
+
+    [SerializeField]
+    private PlayerAnimations anim;
 
     public Rigidbody2D rb2d { get; private set; }
 
@@ -41,6 +46,21 @@ public class Player : MonoBehaviour
         if (invincibilityTimePassed < hitInvincibility) {
             invincibilityTimePassed += Time.deltaTime;
         }
+        Attack();
+    }
+
+    private void Attack() {
+        if (Input.GetMouseButtonDown(0)) {
+            if (!mouseAlreadyClicked) {
+                mouseAlreadyClicked = true; //Prevent input from being detected twice
+                if (secondsSinceLastAttack >= cooldownSeconds) {
+                    anim.SetAnimBool("IsAttacking", true);
+                    StartCoroutine(endAttack());
+                }
+            }
+        } else {
+            mouseAlreadyClicked = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) { //Detects Collisions
@@ -49,7 +69,7 @@ public class Player : MonoBehaviour
             if (collidedObject.tag == "EnemyWeapon") { // Check if collided object is an enemy weapon hitbox
                 // Deal damage
                 health -= collidedObject.GetComponentInChildren<Weapon>().weaponDamage;
-                StartCoroutine(damageAnimation());
+                anim.DamageAnimation();
                 invincibilityTimePassed = 0;
             } else if (collidedObject.tag == "Candy") {
                 Destroy(collidedObject.gameObject);
@@ -61,26 +81,14 @@ public class Player : MonoBehaviour
         if (health <= 0) { //Check for player death
 
             if (dead == false) { // Prevent Lose from being called multiple times
-                // GameManager.Instance.Lose();
+                anim.SetAnimBool("IsDead", true);
                 dead = true;
             }
         }
     }
-    
-    private IEnumerator damageAnimation() { //Sprite flashes to black 2 times during hitInvincibility
-        SpriteRenderer spriteR = gameObject.GetComponentInChildren<SpriteRenderer>();
-        Color originalColor = spriteR.color;
-        for (int j = 0; j < 2; j++) { 
-            for (float i = 1; i > 0.5f; i += -0.5f / ((hitInvincibility / 4) * 60) ) {
-                spriteR.color = new Color(i * originalColor.r, i * originalColor.g, i * originalColor.b, spriteR.color.a);
-                yield return new WaitForSeconds(0.016f);
-            }
-            for (float i = 0.5f; i < 1; i += 0.5f / ((hitInvincibility / 4) * 60)) {
-                spriteR.color = new Color(i * originalColor.r, i * originalColor.g, i * originalColor.b, spriteR.color.a);
-                yield return new WaitForSeconds(0.016f);
-            }
-        }
-        spriteR.color = originalColor;
-        yield return null;
+
+    private IEnumerator endAttack() {
+        yield return new WaitForSeconds(0.5f); // Hard-coded as finding whether the animation has ended is slow
+        anim.SetAnimBool("IsAttacking", false);
     }
 }
