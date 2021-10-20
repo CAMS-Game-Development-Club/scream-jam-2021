@@ -45,15 +45,17 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) { //Detects Collisions
         GameObject collidedObject = collision.gameObject;
-        if (collidedObject.tag == "EnemyWeapon") { // Check if collided object is an enemy weapon hitbox
-            // Deal damage
-            health -= collidedObject.GetComponentInChildren<Weapon>().weaponDamage;
-            StartCoroutine(damageAnimation());
-            invincibilityTimePassed = 0;
-        } else if (collidedObject.tag == "Candy") {
-            Destroy(collidedObject.gameObject);
-            candy_collected += 1;
-            HUD.Instance.UpdateScore();
+        if (invincibilityTimePassed !< cooldownSeconds) {
+            if (collidedObject.tag == "EnemyWeapon") { // Check if collided object is an enemy weapon hitbox
+                // Deal damage
+                health -= collidedObject.GetComponentInChildren<Weapon>().weaponDamage;
+                StartCoroutine(damageAnimation());
+                invincibilityTimePassed = 0;
+            } else if (collidedObject.tag == "Candy") {
+                Destroy(collidedObject.gameObject);
+                candy_collected += 1;
+                HUD.Instance.UpdateScore();
+            }
         }
         
         if (health <= 0) { //Check for player death
