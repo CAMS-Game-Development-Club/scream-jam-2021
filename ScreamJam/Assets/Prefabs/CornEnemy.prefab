@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 979639589938487340}
   - component: {fileID: 747519799570338394}
   - component: {fileID: 6823465449934628531}
+  - component: {fileID: 6192413676250822731}
   - component: {fileID: 7688094920566275179}
   m_Layer: 0
   m_Name: Cornlett Body
@@ -104,6 +105,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6192413676250822731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385053102097825787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f9c8ebb10025648941c2313b12412a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitInvincibility: 0.5
+  spriteR: {fileID: 747519799570338394}
+  anim: {fileID: 6823465449934628531}
+  health: 3
+  isAlive: 1
 --- !u!61 &7688094920566275179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -210,7 +228,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1352295529300863887}
-  - component: {fileID: 2233740495586781136}
   m_Layer: 0
   m_Name: CornEnemy
   m_TagString: Untagged
@@ -233,17 +250,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2233740495586781136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6010987614947646789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f9c8ebb10025648941c2313b12412a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  isAlive: 0

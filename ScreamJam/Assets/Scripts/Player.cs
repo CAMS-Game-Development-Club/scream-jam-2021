@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float cooldownSeconds = 3;
     private float secondsSinceLastAttack = 3;
+
     [SerializeField]
-    public float hitInvincibility = 0.5f;
+    private float hitInvincibility = 0.5f;
     private float invincibilityTimePassed = 0.5f;
 
     private bool mouseAlreadyClicked = false;
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
                 if (secondsSinceLastAttack >= cooldownSeconds) {
                     anim.SetAnimBool("IsAttacking", true);
                     StartCoroutine(endAttack());
+                    secondsSinceLastAttack = 0f;
                 }
             }
         } else {
@@ -64,15 +66,14 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) { //Detects Collisions
-        GameObject collidedObject = collision.gameObject;
         if (invincibilityTimePassed !< cooldownSeconds) {
-            if (collidedObject.tag == "EnemyWeapon") { // Check if collided object is an enemy weapon hitbox
+            if (collision.tag == "EnemyWeapon") { // Check if collided object is an enemy weapon hitbox
                 // Deal damage
-                health -= collidedObject.GetComponentInChildren<Weapon>().weaponDamage;
+                health -= collision.GetComponentInChildren<Weapon>().weaponDamage;
                 anim.DamageAnimation();
                 invincibilityTimePassed = 0;
-            } else if (collidedObject.tag == "Candy") {
-                Destroy(collidedObject.gameObject);
+            } else if (collision.tag == "Candy") {
+                Destroy(collision.gameObject);
                 candy_collected += 1;
                 HUD.Instance.UpdateScore();
             }
